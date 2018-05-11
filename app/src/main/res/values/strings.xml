@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Easy Offer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="featured">Featured</string>
+    <string name="categories">Categories</string>
+    <string name="alloffers">All Offers</string>
+    <string name="action_share">Share</string>
+
+    <string name="pref_filter_criteria_key">sorting_criteria</string>
+    <string name="pref_filter_order_key">sorting_order</string>
+    <!--<string name="pref_filter_order_default_value">desc</string>-->
+    <string name="pref_filter_criteria_default_value">favorite</string>
+    <string name="pref_filter_title">Filter By</string>
+
+
+    <string name="popularity">popular</string>
+    <string name="toprated">top_rated</string>
+    <string name="favorites">favorite</string>
+    <string name="most_popular">Most Popular</string>
+    <string name="highest_rated">Highest Rated</string>
+    <string name="favorite">Favorite</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Enter your Keyword</string>
+    <string name="title_activity_searchable">SearchableActivity</string>
+    <string name="SAMPLE_AD_MOB_ID">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="appwidget_text">Easy Offer </string>
+    <string name="add_widget">Add widget</string>
+    <string name="widget_title">Easy Offer</string>
+    <string name="favbuttonDesc">Click to Add to Favorites </string>
+    <string name="shareDesc">Click to Share</string>
+    <string name="offerImageDesc">Shows the Image related  to the offer</string>
+    <string name="detailThumbnailDesc">Shows a thumbnail related  to the offer details</string>
+
+
+</resources>

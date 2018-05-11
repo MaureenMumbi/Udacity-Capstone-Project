@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "471709555986",
+    "firebase_url": "https://easyofferapp.firebaseio.com",
+    "project_id": "easyofferapp",
+    "storage_bucket": "easyofferapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471709555986:android:1270657b64287866",
+        "android_client_info": {
+          "package_name": "com.easyoffer.android.easyofferapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "471709555986-2mimrer7vs3kqumnnj13b8hsbq2jnidc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.easyoffer.android.easyofferapp",
+            "certificate_hash": "5b7f8aa23709010b6bc5eec7cbca7a5ba469f25c"
+          }
+        },
+        {
+          "client_id": "471709555986-5l86p75bllfcdjitstvgfnuns8fpaf7h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZqYVVMUbpcAcePtmfo8Bep8M3vZTuKZI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "471709555986-5l86p75bllfcdjitstvgfnuns8fpaf7h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
