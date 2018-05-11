@@ -5,7 +5,7 @@ The app is on one stop shop for all offers, it provides available offers in Rest
 
 ## Getting Started
 
-Clone this repository using git clone git@github.com:MaureenMumbi/Capstone-Project command
+Clone this repository using git clone https://github.com/MaureenMumbi/Udacity-Capstone-Project command
 Build and install release version of the app
 
 
