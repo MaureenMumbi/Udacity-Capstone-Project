@@ -20,11 +20,12 @@ public class Items {
     public String thumbnailURL;
     public String offer;
 
-    public Items(){}
+    public Items() {
+    }
 
-    public Items(String description, Long finalCost, Long initialCost, Long itemid, String name, String offerType, String thumbnailURL, String offer){
-        this.description= description;
-        this.finalCost= finalCost;
+    public Items(String description, Long finalCost, Long initialCost, Long itemid, String name, String offerType, String thumbnailURL, String offer) {
+        this.description = description;
+        this.finalCost = finalCost;
         this.initialCost = initialCost;
         this.offerType = offerType;
         this.thumbnailURL = thumbnailURL;

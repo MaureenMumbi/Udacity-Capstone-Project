@@ -20,7 +20,8 @@
     <string name="favorites">favorite</string>
     <string name="most_popular">Most Popular</string>
     <string name="highest_rated">Highest Rated</string>
-    <string name="favorite">Favorite</string>
+    <string name="favorite">Favorites</string>
+    <string name="nofavorites">No Favorites</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Enter your Keyword</string>
     <string name="title_activity_searchable">SearchableActivity</string>
@@ -32,6 +33,9 @@
     <string name="shareDesc">Click to Share</string>
     <string name="offerImageDesc">Shows the Image related  to the offer</string>
     <string name="detailThumbnailDesc">Shows a thumbnail related  to the offer details</string>
-
+    <string name="categoriesDesc">Shows a thumbnail related  to the category</string>
+    <string name="currency">Kshs.</string>
+    <string name="noitemclicked">No item has been clicked </string>
+    <string name="searchQuery">Search query  :  </string>
 
 </resources>

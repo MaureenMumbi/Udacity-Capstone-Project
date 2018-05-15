@@ -54,10 +54,6 @@ import static android.content.ContentValues.TAG;
  */
 public class OfferDetailFragment extends Fragment implements OfferDetailAdapter.OfferItemOnClickHandler {
 
-    private DatabaseReference offerReference;
-    private DatabaseReference offeritemsReference;
-    private StorageReference mStorageRef;
-    private ValueEventListener mOfferListener;
     @BindView(R.id.offer_child_detail)
     RecyclerView mRecyclerView;
     //    @BindView(R.id.offeroutletname)TextView mOutletnameTextView;
@@ -67,14 +63,16 @@ public class OfferDetailFragment extends Fragment implements OfferDetailAdapter.
     ImageView mImageView;
     @BindView(R.id.offervaliddates)
     TextView mValidDatesTextView;
-
     @BindView(R.id.add_to_fav_view)
     ImageButton favoriteButton;
     @BindView(R.id.detail_toolbar)
     Toolbar toolbar;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
-
+    private DatabaseReference offerReference;
+    private DatabaseReference offeritemsReference;
+    private StorageReference mStorageRef;
+    private ValueEventListener mOfferListener;
     private HashMap<String, String> offer = new HashMap<>();
     //   private String offer_key;
 
@@ -182,7 +180,7 @@ public class OfferDetailFragment extends Fragment implements OfferDetailAdapter.
         final ContentResolver resolver = getActivity().getContentResolver();
         final FavoritesHelper fv = new FavoritesHelper();
 
-toggleFavoritesButton(fv, resolver, Long.parseLong(offer.get("id")));
+        toggleFavoritesButton(fv, resolver, Long.parseLong(offer.get("id")));
         favoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -230,7 +228,8 @@ toggleFavoritesButton(fv, resolver, Long.parseLong(offer.get("id")));
                 // [START_EXCLUDE]
                 //  mOutletnameTextView.setText(offers.outletname);
                 mdescriptionView.setText(offers.description);
-                mValidDatesTextView.setText("Offer Dates: " + offers.startdate + " to " + offers.enddate);
+                String offerDate = "Offer Dates: " + offers.startdate + " to " + offers.enddate;
+                mValidDatesTextView.setText(offerDate);
                 collapsingToolbar.setTitle(offers.outletname);
 
                 mStorageRef.child("images/" + offers.imageURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -260,9 +259,9 @@ toggleFavoritesButton(fv, resolver, Long.parseLong(offer.get("id")));
             }
         };
         offerReference.addValueEventListener(offerListener);
-        // [END post_value_event_listener]
 
-        // Keep copy of post listener so we can remove it when app stops
+
+        // Keep copy of offer listener so we can remove it when app stops
         mOfferListener = offerListener;
 
         // Fetch offer details

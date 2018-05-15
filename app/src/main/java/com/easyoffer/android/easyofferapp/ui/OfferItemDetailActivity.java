@@ -23,6 +23,7 @@ public class OfferItemDetailActivity extends AppCompatActivity {
     @BindView(R.id.main_toolbar)
     Toolbar toolbar;
     private HashMap<String, String> clicked_item = new HashMap<>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,14 +56,13 @@ public class OfferItemDetailActivity extends AppCompatActivity {
                 if (fragmentManager.getBackStackEntryCount() > 1) {
 //                    if (findViewById(R.id.ite)==null) {
 
-                        fragmentManager.popBackStack();//}
+                    fragmentManager.popBackStack();//}
 //                    else{
 //                        finish();
 //                    }
                 } else {
                     finish();
                 }
-
 
 
             }
@@ -73,13 +73,12 @@ public class OfferItemDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0 ){
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
         }
     }
-
 
 
     @Override

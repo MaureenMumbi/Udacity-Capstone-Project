@@ -3,15 +3,14 @@ package com.easyoffer.android.easyofferapp.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 /**
  * Created by Mauryn on 4/19/2018.
  */
 
 public class OfferDbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
     static final String DATABASE_NAME = "offer.db";
+    private static final int DATABASE_VERSION = 1;
 
     public OfferDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

@@ -1,22 +1,21 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.easyoffer.android.easyofferapp.fragments.SearchResultsFragment"
-    android:id="@+id/searchview">
+    tools:context="com.easyoffer.android.easyofferapp.fragments.SearchResultsFragment">
 
     <TextView
+        android:id="@+id/searchword"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/searchword"
-        android:textStyle="bold|italic"
-        android:textColor="@color/colorAccent"/>
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold|italic" />
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/searchlistrv"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
 

@@ -9,6 +9,17 @@ import android.os.Parcelable;
 
 public class Offer implements Parcelable {
 
+    public static final Creator<Offer> CREATOR = new Creator<Offer>() {
+        @Override
+        public Offer createFromParcel(Parcel in) {
+            return new Offer(in);
+        }
+
+        @Override
+        public Offer[] newArray(int size) {
+            return new Offer[size];
+        }
+    };
     public int offer_id;
     public String description;
     public String outletname;
@@ -17,8 +28,7 @@ public class Offer implements Parcelable {
     public String imageUrl;
     public String offerKey;
 
-
-    public Offer(int offer_id, String description, String outletname, String startdate,String enddate, String imageUrl, String offerKey){
+    public Offer(int offer_id, String description, String outletname, String startdate, String enddate, String imageUrl, String offerKey) {
         this.offer_id = offer_id;
         this.description = description;
         this.outletname = outletname;
@@ -28,9 +38,21 @@ public class Offer implements Parcelable {
         this.offerKey = offerKey;
     }
 
+    protected Offer(Parcel in) {
+        offer_id = in.readInt();
+        description = in.readString();
+        outletname = in.readString();
+        startdate = in.readString();
+        enddate = in.readString();
+        imageUrl = in.readString();
+        offerKey = in.readString();
+
+    }
+
     public int getOfferID() {
         return offer_id;
     }
+
     public void setOfferID(int offerid) {
         offer_id = offerid;
     }
@@ -38,6 +60,7 @@ public class Offer implements Parcelable {
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String offerdescription) {
         description = offerdescription;
     }
@@ -45,6 +68,7 @@ public class Offer implements Parcelable {
     public String getOutletname() {
         return outletname;
     }
+
     public void setOutletname(String offeroutletname) {
         outletname = offeroutletname;
     }
@@ -52,36 +76,33 @@ public class Offer implements Parcelable {
     public String getStartdate() {
         return startdate;
     }
+
     public void setStartdate(String offerstartdate) {
         startdate = offerstartdate;
     }
 
-
     public String getEnddate() {
         return enddate;
     }
+
     public void setEnddate(String offerenddate) {
         enddate = offerenddate;
     }
 
-    public String getImageUrl(){return  imageUrl;}
-    public void  setImageUrl(String offerimageUrl){imageUrl = offerimageUrl;}
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
+    public void setImageUrl(String offerimageUrl) {
+        imageUrl = offerimageUrl;
+    }
 
-    public String getOfferKey(){return  offerKey;}
-    public void  setOfferKey(String offer_Key){offerKey = offer_Key;}
+    public String getOfferKey() {
+        return offerKey;
+    }
 
-
-
-    protected Offer(Parcel in) {
-        offer_id = in.readInt();
-        description = in.readString();
-        outletname = in.readString();
-        startdate = in.readString();
-        enddate  = in.readString();
-        imageUrl = in.readString();
-        offerKey = in.readString();
-
+    public void setOfferKey(String offer_Key) {
+        offerKey = offer_Key;
     }
 
     @Override
@@ -100,16 +121,4 @@ public class Offer implements Parcelable {
     public int describeContents() {
         return 0;
     }
-
-    public static final Creator<Offer> CREATOR = new Creator<Offer>() {
-        @Override
-        public Offer createFromParcel(Parcel in) {
-            return new Offer(in);
-        }
-
-        @Override
-        public Offer[] newArray(int size) {
-            return new Offer[size];
-        }
-    };
 }

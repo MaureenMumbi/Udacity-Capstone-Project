@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
  * Created by Mauryn on 4/15/2018.
  */
 
-public class OfferItemsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class OfferItemsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     @BindView(R.id.item_description)
     TextView descriptionTextView;
 
@@ -50,20 +51,24 @@ public class OfferItemsViewHolder extends RecyclerView.ViewHolder implements Vie
     ImageButton shareButton;
 
     OfferDetailAdapter.OfferItemOnClickHandler mofferItemOnClickHandler;
+    StorageReference storageReference;
 
     ArrayList<Items> offeritems = new ArrayList<>();
-    public OfferItemsViewHolder(View itemView, OfferDetailAdapter.OfferItemOnClickHandler offerItemOnClickHandler) {
+    Context mcontext;
+
+    public OfferItemsViewHolder(View itemView, Context context, StorageReference mstorageReference, OfferDetailAdapter.OfferItemOnClickHandler offerItemOnClickHandler) {
         super(itemView);
         mofferItemOnClickHandler = offerItemOnClickHandler;
         itemView.setOnClickListener(this);
         ButterKnife.bind(this, itemView);
-
+        storageReference = mstorageReference;
+        mcontext = context;
 
 
     }
 
 
-    public void bindToOfferItems(final Context context, ArrayList<Items> items, int position, StorageReference storageReference) {
+    public void bindToOfferItems(ArrayList<Items> items, int position) {
         offeritems = items;
         final Items itemdetail = items.get(position);
 
@@ -77,14 +82,16 @@ public class OfferItemsViewHolder extends RecyclerView.ViewHolder implements Vie
 
             diff = Double.parseDouble(String.valueOf(initialCost - discountedCost));
 
-            percentageDiscount = (diff / initialCost)*100;
-            itemDiscountTextView.setText("Kshs " + itemdetail.finalCost + "  (" +Math.round(percentageDiscount)+"% off )");
-            itemCostTextView.setText("Kshs. " + itemdetail.initialCost);
+            percentageDiscount = (diff / initialCost) * 100;
+            String itemdiscountText = mcontext.getString(R.string.currency) + itemdetail.finalCost + "  (" + Math.round(percentageDiscount) + "% off )";
+            String itemcost = mcontext.getString(R.string.currency) + itemdetail.initialCost;
+            itemDiscountTextView.setText(itemdiscountText);
+            itemCostTextView.setText(itemcost);
             itemCostTextView.setPaintFlags(itemCostTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         } else {
-
-            itemDiscountTextView.setText("Kshs " + itemdetail.finalCost);
+            String itemcost = mcontext.getString(R.string.currency) + itemdetail.finalCost;
+            itemDiscountTextView.setText(itemcost);
 
         }
         shareButton.setOnClickListener(new View.OnClickListener() {
@@ -93,35 +100,28 @@ public class OfferItemsViewHolder extends RecyclerView.ViewHolder implements Vie
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Great Offer");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, String.format("%s %n %s at Kshs. %s %n",itemdetail.name, itemdetail.description, itemdetail.finalCost));
-                context.startActivity(Intent.createChooser(sharingIntent, "Share via"));
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, String.format("%s %n %s at Kshs. %s %n", itemdetail.name, itemdetail.description, itemdetail.finalCost));
+                mcontext.startActivity(Intent.createChooser(sharingIntent, "Share via"));
             }
         });
 
 
-        // comment_body.setText(items.get(y).thumbnailURL);
-
-        //  }
-//        descriptionTextView.setText(offers.description);
-//        outletnameTextView.setText(offers.outletname );
-
-
-        storageReference.child("thumbnails/" + itemdetail.thumbnailURL);
-        if (itemdetail.thumbnailURL != null) {
-
-            storageReference.child("thumbnails/" + itemdetail.thumbnailURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    Picasso.with(context).load(String.valueOf(uri)).into(detailthumbnailView);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle any errors
-                }
-            });
+        new DisplayImage().execute(itemdetail.thumbnailURL);
+//        if (itemdetail.thumbnailURL != null) {
 //
-        }
+//            storageReference.child("thumbnails/" + itemdetail.thumbnailURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//                    Picasso.with(context).load(String.valueOf(uri)).into(detailthumbnailView);
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception exception) {
+//                    // Handle any errors
+//                }
+//            });
+////
+//        }
         detailthumbnailView.setContentDescription(itemdetail.name);
     }
 
@@ -134,5 +134,32 @@ public class OfferItemsViewHolder extends RecyclerView.ViewHolder implements Vie
 
     }
 
+    private class DisplayImage extends AsyncTask<String, Void, Void> {
 
+        protected Void doInBackground(String... imageURL) {
+            storageReference.child("thumbnails/" + imageURL[0]);
+
+            if (imageURL[0] != null) {
+
+                storageReference.child("thumbnails/" + imageURL[0]).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.with(mcontext).load(String.valueOf(uri)).into(detailthumbnailView);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
+            }
+
+            return null;
+        }
+
+    }
 }
+
+
+
+

@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize" />
+
     <FrameLayout
         android:id="@+id/itemdetail_fragment_container"
         android:layout_width="match_parent"

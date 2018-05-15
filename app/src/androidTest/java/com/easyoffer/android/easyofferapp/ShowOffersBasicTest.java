@@ -36,7 +36,7 @@ public class ShowOffersBasicTest {
 
     @Rule
     public IntentsTestRule<MainActivity> intentTestRule = new IntentsTestRule<>(MainActivity.class);
-
+    private IdlingResource mIdlingResource;
 
     @Before
     public void stubAllExternalIntents() {
@@ -46,9 +46,6 @@ public class ShowOffersBasicTest {
 
         intending(not(isInternal())).respondWith(new Instrumentation.ActivityResult(Activity.RESULT_OK, null));
     }
-
-
-    private IdlingResource mIdlingResource;
 
     @Before
     public void registerIdlingResource() {

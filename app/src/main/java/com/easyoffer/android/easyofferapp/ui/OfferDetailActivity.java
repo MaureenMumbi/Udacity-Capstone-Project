@@ -1,6 +1,5 @@
 package com.easyoffer.android.easyofferapp.ui;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,8 +16,8 @@ import butterknife.ButterKnife;
 public class OfferDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_OFFER_KEY = "offer_key";
-    private String offer_key;
     Bundle bundle;
+    private String offer_key;
 //    static boolean mTwoPane;
 
     @Override
@@ -38,20 +37,7 @@ public class OfferDetailActivity extends AppCompatActivity {
             final OfferDetailFragment offerDetailFragment = new OfferDetailFragment();
             offerDetailFragment.setArguments(bundle);
             fragmentManager.beginTransaction().replace(R.id.detail_fragment_container, offerDetailFragment).commit();//.addToBackStack(null).commit();
-            boolean isTablet = getResources().getBoolean(R.bool.isTablet);
 
-//.addToBackStack(null)
-//            if (isTablet || checkIfLandscape()) {
-//
-//                Log.e("In Landscape", "Calling detail Fragment");
-//                FragmentManager itemdetailfragmentManager = getSupportFragmentManager();
-//                final OfferItemDetailFragment offerItemDetailFragment = new OfferItemDetailFragment();
-//                offerItemDetailFragment.setArguments(bundle);
-//                itemdetailfragmentManager.beginTransaction().replace(R.id.itemdetail_fragment_container, offerItemDetailFragment).addToBackStack(null).commit();//.addToBackStack(null).commit();
-//                mTwoPane = true;
-//            } else {
-//                mTwoPane = false;
-//            }
         }
     }
 
@@ -74,7 +60,4 @@ public class OfferDetailActivity extends AppCompatActivity {
     }
 
 
-    public boolean checkIfLandscape() {
-        return getApplicationContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-    }
 }

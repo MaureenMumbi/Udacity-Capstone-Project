@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:id="@+id/search_layout1"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/offerthumbnail"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_centerVertical="true"
-        />
+        android:contentDescription="@string/offerImageDesc" />
 
     <LinearLayout
         android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginLeft="10dp"
-        android:padding="5dp"
-        android:layout_toRightOf="@+id/offerthumbnail">
-
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/offerthumbnail"
+        android:layout_toRightOf="@+id/offerthumbnail"
+        android:orientation="vertical"
+        android:padding="5dp">
 
 
         <TextView
@@ -28,25 +28,25 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingTop="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="4dp"
-            android:textColor="@color/material_gray_800"
             android:ellipsize="end"
-            android:maxLines="4" />
+            android:maxLines="4"
+            android:paddingBottom="4dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:textColor="@color/material_gray_800" />
 
         <TextView
             android:id="@+id/description"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingBottom="16dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:paddingBottom="16dp"
-            android:textColor="#6000"
-            android:maxLines="2"
-            android:ellipsize="end" />
+            android:textColor="#6000" />
 
     </LinearLayout>
 

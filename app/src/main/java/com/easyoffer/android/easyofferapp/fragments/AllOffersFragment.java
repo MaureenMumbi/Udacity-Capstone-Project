@@ -21,7 +21,7 @@ public class AllOffersFragment extends MainActivityFragment {
     public Query getQuery(DatabaseReference databaseReference) {
         // All my posts
         return databaseReference.child("offers").orderByChild("active").equalTo(true);
-                //.child(getUid());
+        //.child(getUid());
     }
 
 //    @Override

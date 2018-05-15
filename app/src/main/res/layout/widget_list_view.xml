@@ -2,20 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/black" >
+    android:background="@android:color/black"
+    android:orientation="vertical">
 
-    <FrameLayout android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView android:layout_width="match_parent"
+
+        <TextView
             android:id="@+id/widgetTitleLabel"
-            android:text="@string/widget_title"
-            android:textColor="@color/material_gray_100"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_title_min_height"
             android:background="@color/colorPrimary"
-            android:textSize="18dp"
             android:gravity="center"
+            android:text="@string/widget_title"
             android:textAllCaps="true"
-            android:layout_height="@dimen/widget_title_min_height"></TextView>
+            android:textColor="@color/material_gray_100"
+            android:textSize="18sp"></TextView>
     </FrameLayout>
 
     <!-- ListView to be shown on widget -->
@@ -30,30 +33,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="No Favorites"
+        android:text="@string/nofavorites"
         android:textColor="#ffffff"
         android:textSize="20sp"
         android:visibility="gone" />
 
 </LinearLayout>
 
-    <!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--xmlns:tools="http://schemas.android.com/tools">-->
+    <!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--xmlns:tools="http://schemas.android.com/tools">-->
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:orientation="vertical">-->
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:orientation="vertical">-->
 
-    <!--<ListView android:id="@+id/favlist_view"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:gravity="center"-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android" />-->
-    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
-
+    <!--<ListView android:id="@+id/favlist_view"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:gravity="center"--><!--xmlns:android="http://schemas.android.com/apk/res/android" />--><!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
 
 
     <!--&lt;!&ndash;</FrameLayout>&ndash;&gt;-->

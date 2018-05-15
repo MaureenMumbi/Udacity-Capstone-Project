@@ -28,10 +28,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/offerImageDesc"
                 android:fitsSystemWindows="true"
                 android:scaleType="fitXY"
-                app:layout_collapseMode="parallax"
-                android:contentDescription="@string/offerImageDesc"/>
+                app:layout_collapseMode="parallax" />
 
 
             <View
@@ -99,7 +99,7 @@
                 android:id="@+id/offer_child_detail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="16dp"/>
+                android:paddingTop="16dp" />
 
 
         </LinearLayout>
@@ -115,11 +115,11 @@
         android:layout_above="@+id/share_fab"
 
         android:layout_marginBottom="46dp"
+        android:contentDescription="@string/favbuttonDesc"
         android:src="@drawable/ic_favorite_border_black_48dp"
         app:fabSize="mini"
         app:layout_anchor="@+id/appbar"
-        app:layout_anchorGravity="right|bottom"
-        android:contentDescription="@string/favbuttonDesc"/>
+        app:layout_anchorGravity="right|bottom" />
 
 
 </android.support.design.widget.CoordinatorLayout>

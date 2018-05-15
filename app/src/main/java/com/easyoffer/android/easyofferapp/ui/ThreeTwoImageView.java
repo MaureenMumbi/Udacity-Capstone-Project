@@ -15,18 +15,20 @@ public class ThreeTwoImageView extends ImageView {
     public ThreeTwoImageView(Context context) {
         super(context);
     }
+
     public ThreeTwoImageView(Context context, AttributeSet attributeSet) {
-        super(context,attributeSet);
+        super(context, attributeSet);
     }
+
     public ThreeTwoImageView(Context context, AttributeSet attributeSet, int defStyle) {
-        super(context,attributeSet,defStyle);
+        super(context, attributeSet, defStyle);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-        int threeTwoHeight = MeasureSpec.getSize(widthMeasureSpec)*2/3;
-        int threeTwoHeightSpec =MeasureSpec.makeMeasureSpec(threeTwoHeight,MeasureSpec.EXACTLY);
+        int threeTwoHeight = MeasureSpec.getSize(widthMeasureSpec) * 2 / 3;
+        int threeTwoHeightSpec = MeasureSpec.makeMeasureSpec(threeTwoHeight, MeasureSpec.EXACTLY);
         super.onMeasure(widthMeasureSpec, threeTwoHeightSpec);
     }
 }

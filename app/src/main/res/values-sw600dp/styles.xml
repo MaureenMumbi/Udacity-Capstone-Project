@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="MyTabLayout" parent="Widget.Design.TabLayout">
-    <item name="tabGravity">fill</item>
-    <item name="tabMaxWidth">0dp</item>
-</style>
+        <item name="tabGravity">fill</item>
+        <item name="tabMaxWidth">0dp</item>
+    </style>
 
 </resources>

@@ -11,15 +11,16 @@ import java.util.Map;
 
 public class Groups {
 
-    public String groupname ;
-    public HashMap<String,Boolean> members ;
+    public String groupname;
+    public HashMap<String, Boolean> members;
     public String categoryImageURL;
 
-    public Groups(){}
+    public Groups() {
+    }
 
-    public Groups(String groupname, HashMap<String,Boolean> members,String categoryImageURL){
+    public Groups(String groupname, HashMap<String, Boolean> members, String categoryImageURL) {
         this.groupname = groupname;
-        this.members =members;
+        this.members = members;
         this.categoryImageURL = categoryImageURL;
     }
 
@@ -29,7 +30,7 @@ public class Groups {
         HashMap<String, Object> result = new HashMap<>();
         result.put("groupname", groupname);
         result.put("members", members);
-        result.put("categoryImageURL",categoryImageURL);
+        result.put("categoryImageURL", categoryImageURL);
 
         return result;
     }

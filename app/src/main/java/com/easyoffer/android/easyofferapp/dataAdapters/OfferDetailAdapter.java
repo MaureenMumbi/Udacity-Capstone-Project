@@ -29,21 +29,15 @@ import java.util.ArrayList;
 
 
 public class OfferDetailAdapter extends RecyclerView.Adapter<OfferItemsViewHolder> {
+    private static String TAG = "OfferDetailAdapter";
+    private static OfferItemOnClickHandler mofferItemOnClickHandler;
     private Context mContext;
     private DatabaseReference mDatabaseReference;
     private StorageReference storageReference;
-    private static String TAG = "OfferDetailAdapter";
     private Query query;
     private ValueEventListener mItemOfferListener;
     private ArrayList<Items> ItemsOfferList = new ArrayList<>();
 
-    private static OfferItemOnClickHandler mofferItemOnClickHandler;
-
-
-    //
-    public interface OfferItemOnClickHandler {
-        void OnClickListener(Items items);
-    }
 
     public OfferDetailAdapter(Context context, String offer_key, OfferItemOnClickHandler offerItemOnclickHandler) {
 
@@ -56,7 +50,6 @@ public class OfferDetailAdapter extends RecyclerView.Adapter<OfferItemsViewHolde
         storageReference = FirebaseStorage.getInstance().getReference();
 
         query = offeritemsReference.orderByChild("offer").equalTo(offer_key);
-
 
 
         query.addValueEventListener(new ValueEventListener() {
@@ -79,10 +72,7 @@ public class OfferDetailAdapter extends RecyclerView.Adapter<OfferItemsViewHolde
         });
 
 
-
-
     }
-
 
     @Override
     public OfferItemsViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
@@ -93,21 +83,16 @@ public class OfferDetailAdapter extends RecyclerView.Adapter<OfferItemsViewHolde
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachtoParentImmediately = false;
         View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachtoParentImmediately);
-        OfferItemsViewHolder itemofferViewHolder = new OfferItemsViewHolder(view,mofferItemOnClickHandler);
-
-
+        OfferItemsViewHolder itemofferViewHolder = new OfferItemsViewHolder(view, context, storageReference, mofferItemOnClickHandler);
 
 
         return itemofferViewHolder;
 
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull OfferItemsViewHolder holder, final int position) {
-        holder.bindToOfferItems(mContext, ItemsOfferList, position, storageReference);
-
-
+        holder.bindToOfferItems(ItemsOfferList, position);
 
 
     }
@@ -115,6 +100,11 @@ public class OfferDetailAdapter extends RecyclerView.Adapter<OfferItemsViewHolde
     @Override
     public int getItemCount() {
         return ItemsOfferList.size();
+    }
+
+    //
+    public interface OfferItemOnClickHandler {
+        void OnClickListener(Items items);
     }
 
 

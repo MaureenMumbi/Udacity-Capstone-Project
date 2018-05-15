@@ -7,10 +7,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".data.MApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".data.MApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -30,7 +30,8 @@
         <activity
             android:name=".ui.OfferDetailActivity"
             android:parentActivityName=".ui.MainActivity" />
-        <activity android:name=".ui.CategoryDetailActivity"
+        <activity
+            android:name=".ui.CategoryDetailActivity"
             android:parentActivityName=".ui.MainActivity" />
         <activity android:name=".ui.SettingsActivity" />
         <activity
@@ -85,8 +86,6 @@
             android:name=".data.ListWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
-
->
     </application>
 
 </manifest>

@@ -21,7 +21,12 @@ public class OfferListService extends IntentService {
 
     public static final String ACTION_LIST_FAVORITES = "com.easyoffer.android.easyofferapp.action.list_favorites";
     public static final String ACTION_UPDATE_FAVORITE_WIDGETS = "com.easyoffer.android.easyofferapp.action.update_listfav_widgets";
-
+    public static HashMap<String, String> favoriteOfferHashMap = new HashMap<>();
+    public static ArrayList<String> favoriteOfferList = new ArrayList<>();
+    /**
+     * Handle action UpdateFavsWidgets in the provided background thread
+     */
+    static ArrayList<Offer> FavOfferList = new ArrayList<>();
 
     public OfferListService() {
         super("OfferListService");
@@ -67,15 +72,6 @@ public class OfferListService extends IntentService {
             }
         }
     }
-
-
-    /**
-     * Handle action UpdateFavsWidgets in the provided background thread
-     */
-    static ArrayList<Offer> FavOfferList = new ArrayList<>();
-    public static HashMap<String, String> favoriteOfferHashMap = new HashMap<>();
-    public static ArrayList<String> favoriteOfferList = new ArrayList<>();
-
 
     private void handleActionUpdateFavoritesWidgets(Intent intent) {
         favoriteOfferList = new ArrayList<>();

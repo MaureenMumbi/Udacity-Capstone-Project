@@ -7,16 +7,14 @@
     android:orientation="vertical">
 
 
-
     <TextView
         android:id="@+id/favlistview_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="viewStart"
         android:layout_gravity="start"
-        android:textStyle="bold"
-        android:textSize="15sp"
         android:layout_margin="3dp"
-        />
+        android:textAlignment="viewStart"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

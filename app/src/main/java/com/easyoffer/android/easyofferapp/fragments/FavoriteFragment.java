@@ -8,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,19 +33,16 @@ import static com.easyoffer.android.easyofferapp.data.FavoriteOfferWidget.FAVOUR
 public class FavoriteFragment extends Fragment implements FavoriteOfferAdapter.GridItemOnClickHandler {
 
 
-    private ArrayList<String> favorited_offers;
     @BindView(R.id.favofferlistrv)
     RecyclerView favRecyclerView;
     FavoriteOfferAdapter favoriteOfferAdapter;
-
+    ArrayList<Offer> favList = new ArrayList();
+    private ArrayList<String> favorited_offers;
     private StaggeredGridLayoutManager layoutManager;
-
 
     public FavoriteFragment() {
         // Required empty public constructor
     }
-
-    ArrayList<Offer> favList = new ArrayList();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

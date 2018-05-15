@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,17 +37,10 @@ import butterknife.ButterKnife;
 public class OfferItemDetailFragment extends Fragment {
 
 
-    public OfferItemDetailFragment() {
-        // Required empty public constructor
-    }
-
-    private StorageReference mStorageRef;
-
     //    @BindView(R.id.detailthumbnailURL)
 //    ImageView thumbnailImageView;
     @BindView(R.id.detailthumbnailURL)
     ThreeTwoImageView thumbnailImageView;
-
     @BindView(R.id.item_name)
     TextView nameTextView;
     @BindView(R.id.item_description)
@@ -63,9 +55,13 @@ public class OfferItemDetailFragment extends Fragment {
     ImageButton shareButton;
     @BindView(R.id.adView)
     AdView getmAdView;
-
+    private StorageReference mStorageRef;
     private String EXTRA_CLICKED_ITEM = "clicked_item";
     private HashMap<String, String> clickeditem = new HashMap<>();
+
+    public OfferItemDetailFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -132,13 +128,16 @@ public class OfferItemDetailFragment extends Fragment {
                 diff = Double.parseDouble(String.valueOf(initialCost - discountedCost));
 
                 percentageDiscount = (diff / initialCost) * 100;
-                discountedCostTextView.setText("Kshs " + clickeditem.get("finalCost") + "  (" + Math.round(percentageDiscount) + "% off )");
-                costTextView.setText("Kshs. " + clickeditem.get("initialCost"));
+
+                String discountedCostText = "Kshs " + clickeditem.get("finalCost") + "  (" + Math.round(percentageDiscount) + "% off )";
+                discountedCostTextView.setText(discountedCostText);
+                String initialCostText = "Kshs. " + clickeditem.get("initialCost");
+                costTextView.setText(initialCostText);
                 costTextView.setPaintFlags(costTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             } else {
-
-                discountedCostTextView.setText("Kshs " + clickeditem.get("finalCost"));
+                String discountedCostText = "Kshs " + clickeditem.get("finalCost");
+                discountedCostTextView.setText(discountedCostText);
 
             }
 
@@ -155,7 +154,7 @@ public class OfferItemDetailFragment extends Fragment {
 
         } else {
 
-            emptyTextView.setText("No item has been clicked ");
+            emptyTextView.setText(getString(R.string.noitemclicked));
 
         }
     }

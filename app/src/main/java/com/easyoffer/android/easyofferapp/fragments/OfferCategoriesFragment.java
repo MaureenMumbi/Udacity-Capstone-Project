@@ -37,25 +37,22 @@ import butterknife.ButterKnife;
 public class OfferCategoriesFragment extends Fragment {
 
 
-    public OfferCategoriesFragment() {
-        // Required empty public constructor
-    }
-
-
-    public Query getQuery(DatabaseReference databaseReference) {
-        return databaseReference.child("offers").child("groups");
-    }
-
+    public static final String CATEGORY_GROUP_MEMBERS = "GROUP_MEMBERS";
     private final static String TAG = "OfferCategoriesFragment";
     @BindView(R.id.offerlistrv)
     RecyclerView mRecyclerView;
     StaggeredGridLayoutManager layoutManager;
-
     private DatabaseReference databaseReference;
     private StorageReference mStorageRef;
     private FirebaseRecyclerAdapter<Groups, GroupsViewHolder> mAdapter;
-    public static final String CATEGORY_GROUP_MEMBERS ="GROUP_MEMBERS";
 
+    public OfferCategoriesFragment() {
+        // Required empty public constructor
+    }
+
+    public Query getQuery(DatabaseReference databaseReference) {
+        return databaseReference.child("offers").child("groups");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,16 +92,15 @@ public class OfferCategoriesFragment extends Fragment {
                 System.out.println("GROUP KEY %%%%%%%%%" + groupRef.getKey());
                 final String categoryKey = groupRef.getKey();
 
-                final ArrayList<String> alloffersincategory= new ArrayList<>();
+                final ArrayList<String> alloffersincategory = new ArrayList<>();
 
-                for ( String key :  model.members.keySet() ) {
-                    System.out.println( key );
+                for (String key : model.members.keySet()) {
+                    System.out.println(key);
                     alloffersincategory.add(key);
                 }
 
 
-
-                holder.bindtoGroups(model,getContext(), mStorageRef);
+                holder.bindtoGroups(model, getContext(), mStorageRef);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -112,10 +108,10 @@ public class OfferCategoriesFragment extends Fragment {
 
                         Log.d(TAG, "iTEM " + categoryKey + "CLICKED FROM MAIN ACTIVITY");
 
-                        Intent  intent = new Intent(getActivity(), CategoryDetailActivity.class);
+                        Intent intent = new Intent(getActivity(), CategoryDetailActivity.class);
                         intent.putExtra(CategoryDetailActivity.EXTRA_CATEGORY_KEY, categoryKey);
 
-                        intent.putExtra(CATEGORY_GROUP_MEMBERS,alloffersincategory);
+                        intent.putExtra(CATEGORY_GROUP_MEMBERS, alloffersincategory);
                         startActivity(intent);
                     }
                 });

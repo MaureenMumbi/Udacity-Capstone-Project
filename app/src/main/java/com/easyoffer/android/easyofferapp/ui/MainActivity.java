@@ -46,43 +46,51 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.easyoffer.android.easyofferapp.data.FavoriteOfferWidget.FAVOURITE_OFFER_LIST;
-import static com.easyoffer.android.easyofferapp.ui.SearchResultsActivity.EXTRA_SEARCH_QUERY;
 
 public class MainActivity extends AppCompatActivity {
 
 
-    @Nullable
-    private SimpleIdlingResource simpleIdlingResource;
-
-    @VisibleForTesting
-    @Nullable
-    public IdlingResource getIdlingResource(){
-        if(simpleIdlingResource == null){
-            simpleIdlingResource = new SimpleIdlingResource();
-
-        }
-        return simpleIdlingResource;
-    }
-
-
     String TAG = MainActivity.class.getSimpleName();
-    private FragmentPagerAdapter mPagerAdapter;
-    private ValueEventListener mPostListener;
-    private AdView mAdView;
-    private FirebaseAnalytics mFirebaseAnalytics;
     @BindView(R.id.vpcontainer)
     ViewPager mViewPager;
     @BindView(R.id.tabs)
     TabLayout tabLayout;
     @BindView(R.id.main_toolbar)
     Toolbar toolbar;
-    private Menu mMenu;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.main_activity_container)
     View containerview;
     @BindView(R.id.adView)
     AdView getmAdView;
+    @Nullable
+    private SimpleIdlingResource simpleIdlingResource;
+    private FragmentPagerAdapter mPagerAdapter;
+    private ValueEventListener mPostListener;
+    private AdView mAdView;
+    private FirebaseAnalytics mFirebaseAnalytics;
+    private Menu mMenu;
+    private boolean mIsRefreshing = false;
+    private BroadcastReceiver mRefreshingReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (RefresherService.BROADCAST_ACTION_STATE_CHANGE.equals(intent.getAction())) {
+                mIsRefreshing = intent.getBooleanExtra(RefresherService.EXTRA_REFRESHING, false);
+
+                updateRefreshingUI();
+            }
+        }
+    };
+
+    @VisibleForTesting
+    @Nullable
+    public IdlingResource getIdlingResource() {
+        if (simpleIdlingResource == null) {
+            simpleIdlingResource = new SimpleIdlingResource();
+
+        }
+        return simpleIdlingResource;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void refresh() {
         startService(new Intent(this, RefresherService.class));
     }
@@ -182,20 +189,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         unregisterReceiver(mRefreshingReceiver);
     }
-
-    private boolean mIsRefreshing = false;
-
-
-    private BroadcastReceiver mRefreshingReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (RefresherService.BROADCAST_ACTION_STATE_CHANGE.equals(intent.getAction())) {
-                mIsRefreshing = intent.getBooleanExtra(RefresherService.EXTRA_REFRESHING, false);
-
-                updateRefreshingUI();
-            }
-        }
-    };
 
     private void updateRefreshingUI() {
         mSwipeRefreshLayout.setRefreshing(mIsRefreshing);
@@ -216,19 +209,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void handleIntent(Intent intent, Bundle bundle) {
-
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            //use the query to search your data somehow
-
-            Intent search_intent = new Intent(this, SearchResultsActivity.class);
-            search_intent.putExtra(EXTRA_SEARCH_QUERY, query);
-            //    bundle.putString(EXTRA_SEARCH_QUERY,query);
-            startActivity(search_intent);
-
-        }
-    }
+//    private void handleIntent(Intent intent, Bundle bundle) {
+//
+//        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+//            String query = intent.getStringExtra(SearchManager.QUERY);
+//            //use the query to search your data somehow
+//
+//            Intent search_intent = new Intent(this, SearchResultsActivity.class);
+//            search_intent.putExtra(EXTRA_SEARCH_QUERY, query);
+//            //    bundle.putString(EXTRA_SEARCH_QUERY,query);
+//            startActivity(search_intent);
+//
+//        }
+//    }
 
 
     @Override
@@ -257,13 +250,13 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(startSettingsActivity);
 //            return true;
 //        } else
-            if (id == R.id.action_favorites) {
+        if (id == R.id.action_favorites) {
 
             Intent intent = new Intent(this, FavoritesActivity.class);
             ArrayList<Offer> favs = FavoritesHelper.getFavorites(this);
-            intent.putExtra(FAVOURITE_OFFER_LIST,favs );
+            intent.putExtra(FAVOURITE_OFFER_LIST, favs);
             startActivity(intent);
-;
+            ;
             return true;
 
         }

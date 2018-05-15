@@ -15,10 +15,10 @@ import android.support.annotation.Nullable;
  */
 
 public class OffersProvider extends ContentProvider {
-    private static UriMatcher sUriMatcher = buildUriMatcher();
-    private OfferDbHelper mOpenHelper;
     public static final int OFFER = 100;
     public static final int OFFER_ID = 101;
+    private static UriMatcher sUriMatcher = buildUriMatcher();
+    private OfferDbHelper mOpenHelper;
 
     public static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -59,8 +59,8 @@ public class OffersProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri" + uri);
         }
 
-        retCursor = builder.query(db,projection,selection,selectionArgs,null,null,null);
-        retCursor.setNotificationUri(getContext().getContentResolver(),uri);
+        retCursor = builder.query(db, projection, selection, selectionArgs, null, null, null);
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
         return retCursor;
     }
 
@@ -90,8 +90,7 @@ public class OffersProvider extends ContentProvider {
                 long _id = db.insert(OfferContract.OfferEntry.TABLE_NAME, null, contentValues);
                 if (_id > 0) {
                     returnUri = OfferContract.OfferEntry.buildOfferUri(_id);
-                }
-                else {
+                } else {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 }
                 break;

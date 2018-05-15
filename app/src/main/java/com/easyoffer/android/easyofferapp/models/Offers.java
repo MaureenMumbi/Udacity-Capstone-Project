@@ -14,6 +14,17 @@ import java.util.Map;
 
 public class Offers implements Parcelable {
 
+    public static final Creator<Offers> CREATOR = new Creator<Offers>() {
+        @Override
+        public Offers createFromParcel(Parcel in) {
+            return new Offers(in);
+        }
+
+        @Override
+        public Offers[] newArray(int size) {
+            return new Offers[size];
+        }
+    };
     public Long id;
     public String outletname;
     public Boolean active;
@@ -23,12 +34,13 @@ public class Offers implements Parcelable {
     public String group;
     public Boolean featured;
     public String imageURL;
-    public String offerKey;
-//    public Map<String, String> items = new HashMap<>();
+    //    public Map<String, String> items = new HashMap<>();
 //    public ArrayList<String> offers  = new ArrayList<>();
+    public String offerKey;
 
     public Offers() {
     }
+
 
     public Offers(Long id, String outletname, Boolean active, String description, String startdate, String enddate, String group,
                   boolean featured, String imageURL, String offerKey) {
@@ -43,7 +55,6 @@ public class Offers implements Parcelable {
         this.imageURL = imageURL;
         this.offerKey = offerKey;
     }
-
 
     protected Offers(Parcel in) {
         if (in.readByte() == 0) {
@@ -87,18 +98,6 @@ public class Offers implements Parcelable {
     public int describeContents() {
         return 0;
     }
-
-    public static final Creator<Offers> CREATOR = new Creator<Offers>() {
-        @Override
-        public Offers createFromParcel(Parcel in) {
-            return new Offers(in);
-        }
-
-        @Override
-        public Offers[] newArray(int size) {
-            return new Offers[size];
-        }
-    };
 
     // [START offer_to_map]
     @Exclude

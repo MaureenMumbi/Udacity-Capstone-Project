@@ -28,12 +28,11 @@ import butterknife.ButterKnife;
  */
 
 public class FavoriteOfferAdapter extends RecyclerView.Adapter<FavoriteOfferAdapter.FavoriteOfferItemsViewHolder> {
-    private Context mContext;
-    private StorageReference storageReference;
     private static String TAG = "FavoriteOfferAdapter";
-
     private static ArrayList<Offer> FavoriteOfferList = new ArrayList<>();
     private static GridItemOnClickHandler mgridItemOnClickHandler;
+    private Context mContext;
+    private StorageReference storageReference;
 
 
     //public FavoriteOfferAdapter(FavoriteFragment favoriteFragment, Context context, String offer_key) {
@@ -75,6 +74,10 @@ public class FavoriteOfferAdapter extends RecyclerView.Adapter<FavoriteOfferAdap
         return FavoriteOfferList.size();
     }
 
+
+    public interface GridItemOnClickHandler {
+        void OnClickListener(Offer offer);
+    }
 
     public static class FavoriteOfferItemsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -129,10 +132,6 @@ public class FavoriteOfferAdapter extends RecyclerView.Adapter<FavoriteOfferAdap
 
 
         }
-    }
-
-    public interface GridItemOnClickHandler {
-        void OnClickListener(Offer offer);
     }
 
 

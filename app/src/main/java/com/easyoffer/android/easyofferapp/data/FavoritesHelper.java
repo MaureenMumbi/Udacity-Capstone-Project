@@ -16,7 +16,42 @@ import java.util.HashMap;
 public class FavoritesHelper {
 
 
-    public void addToFavorites(ContentResolver resolver,HashMap<String, String> offer)  {
+    public static ArrayList<Offer> getFavorites(Context context) {
+        ArrayList<Offer> offerData = new ArrayList<>();
+        Uri uri = OfferContract.OfferEntry.CONTENT_URI;
+        ContentResolver resolver = context.getContentResolver();
+        Cursor cursor = null;
+
+        try {
+
+            cursor = resolver.query(uri, null, null, null, null);
+
+            // clear movies
+            offerData.clear();
+
+            if (cursor.moveToFirst()) {
+                do {
+
+                    //int offer_id, String description, String outletname, String startdate,String enddate, String imageUrl, String offerKey
+                    Offer offer = new Offer(cursor.getInt(1), cursor.getString(2),
+                            cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                            cursor.getString(6), cursor.getString(7));
+
+                    offerData.add(offer);
+
+                } while (cursor.moveToNext());
+            }
+
+        } finally {
+
+            if (cursor != null)
+                cursor.close();
+
+        }
+        return offerData;
+    }
+
+    public void addToFavorites(ContentResolver resolver, HashMap<String, String> offer) {
 
         Uri uri = OfferContract.OfferEntry.CONTENT_URI;
         ContentValues contentValues = new ContentValues();
@@ -33,19 +68,17 @@ public class FavoritesHelper {
         resolver.insert(uri, contentValues);
     }
 
-
-    public void deleteFromFavorites(ContentResolver resolver,long offerid) {
+    public void deleteFromFavorites(ContentResolver resolver, long offerid) {
 
         Uri uri = OfferContract.OfferEntry.CONTENT_URI;
 
         long noDeleted = resolver.delete(uri,
                 OfferContract.OfferEntry.COLUMN_OFFER_ID + " = ? ",
-                new String[]{ offerid + "" });
+                new String[]{offerid + ""});
 
     }
 
-
-    public boolean queryFavorites(ContentResolver resolver,long offerid) {
+    public boolean queryFavorites(ContentResolver resolver, long offerid) {
 
         Uri uri = OfferContract.OfferEntry.buildOfferUri(offerid);
         Cursor cursor = null;
@@ -58,47 +91,12 @@ public class FavoritesHelper {
 
         } finally {
 
-            if(cursor != null)
+            if (cursor != null)
                 cursor.close();
 
         }
 
         return false;
-    }
-
-    public static ArrayList<Offer> getFavorites(Context context){
-        ArrayList<Offer> offerData = new ArrayList<>();
-        Uri uri = OfferContract.OfferEntry.CONTENT_URI;
-        ContentResolver resolver = context.getContentResolver();
-        Cursor cursor = null;
-
-        try {
-
-            cursor = resolver.query(uri, null, null, null, null);
-
-            // clear movies
-            offerData.clear();
-
-            if (cursor.moveToFirst()){
-                do {
-
-                    //int offer_id, String description, String outletname, String startdate,String enddate, String imageUrl, String offerKey
-                    Offer offer = new Offer(cursor.getInt(1), cursor.getString(2),
-                            cursor.getString(3), cursor.getString(4), cursor.getString(5),
-                            cursor.getString(6),cursor.getString(7));
-
-                    offerData.add(offer);
-
-                } while (cursor.moveToNext());
-            }
-
-        } finally {
-
-            if(cursor != null)
-                cursor.close();
-
-        }
-        return offerData;
     }
 
 

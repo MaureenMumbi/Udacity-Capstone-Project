@@ -63,7 +63,7 @@ public class FavoritesActivity extends AppCompatActivity {
 //            startActivity(startSettingsActivity);
 //            return true;
 //        } else
-            if (id == R.id.action_favorites) {
+        if (id == R.id.action_favorites) {
             Intent intent = new Intent(this, FavoritesActivity.class);
             startActivity(intent);
         }

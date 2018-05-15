@@ -97,7 +97,7 @@ public abstract class MainActivityFragment extends Fragment {
                 DatabaseReference offerRef = getRef(position);
                 final String offerKey = offerRef.getKey();
 
-                holder.bindToOffer(model, getContext(), mStorageRef);
+                holder.bindToOffer(model);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -134,7 +134,7 @@ public abstract class MainActivityFragment extends Fragment {
                 LayoutInflater inflater = LayoutInflater.from(context);
                 boolean shouldAttachtoParentImmediately = false;
                 View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachtoParentImmediately);
-                OfferViewHolder offerViewHolder = new OfferViewHolder(view);
+                OfferViewHolder offerViewHolder = new OfferViewHolder(view, getContext(), mStorageRef);
                 return offerViewHolder;
 
             }

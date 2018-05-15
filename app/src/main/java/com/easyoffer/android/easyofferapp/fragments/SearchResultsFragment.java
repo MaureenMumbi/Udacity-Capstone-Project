@@ -33,8 +33,6 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.easyoffer.android.easyofferapp.ui.SearchResultsActivity.EXTRA_SEARCH_QUERY;
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -43,34 +41,32 @@ import static com.easyoffer.android.easyofferapp.ui.SearchResultsActivity.EXTRA_
 public class SearchResultsFragment extends Fragment {
 
 
+    private final static String TAG = "SearchResultsFragment";
+    static String EXTRA_SEARCH_QUERY = "EXTRA_SEARCH_QUERY";
+    @BindView(R.id.searchlistrv)
+    RecyclerView mRecyclerView;
+    LinearLayoutManager layoutManager;
+    @BindView(R.id.searchword)
+    TextView searchwordTextView;
+    //public static final String CATEGORY_GROUP_MEMBERS ="GROUP_MEMBERS";
+    String query = "";
+    private DatabaseReference databaseReference;
+    private StorageReference mStorageRef;
+    private FirebaseRecyclerAdapter<Offers, OfferViewHolder> mAdapter;
+
     public SearchResultsFragment() {
         // Required empty public constructor
     }
 
-    public Query getQuery(DatabaseReference databaseReference,String key ,String query) {
+    public Query getQuery(DatabaseReference databaseReference, String key, String query) {
         return databaseReference.child("offers").orderByChild("outletname")
                 .startAt(query)
                 .endAt(query + "\uf8ff");
     }
 
-    private final static String TAG = "SearchResultsFragment";
-    @BindView(R.id.searchlistrv)
-    RecyclerView mRecyclerView;
-    LinearLayoutManager layoutManager;
-
-    @BindView(R.id.searchword)TextView searchwordTextView;
-
-    private DatabaseReference databaseReference;
-    private StorageReference mStorageRef;
-    private FirebaseRecyclerAdapter<Offers, OfferViewHolder> mAdapter;
-    //public static final String CATEGORY_GROUP_MEMBERS ="GROUP_MEMBERS";
-    String query = "";
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
 
 
         View rootView = inflater.inflate(R.layout.fragment_search_results, container, false);
@@ -82,13 +78,13 @@ public class SearchResultsFragment extends Fragment {
 
         mRecyclerView.setHasFixedSize(true);
         Intent intent = getActivity().getIntent();
-        if (getArguments() != null ) {//|| intent != null && intent.hasExtra(EXTRA_SEARCH_QUERY)
-                query = getArguments().getString(EXTRA_SEARCH_QUERY);
+        if (getArguments() != null) {//|| intent != null && intent.hasExtra(EXTRA_SEARCH_QUERY)
+            query = getArguments().getString(EXTRA_SEARCH_QUERY);
 
         }
 
-
-        searchwordTextView.setText("Search query  :  "+query);
+        String searchQuery = getString(R.string.searchQuery) + query;
+        searchwordTextView.setText(searchQuery);
         return rootView;
     }
 
@@ -99,7 +95,7 @@ public class SearchResultsFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        final Query offerQuery = getQuery(databaseReference,"", query);
+        final Query offerQuery = getQuery(databaseReference, "", query);
 
 
         FirebaseRecyclerOptions firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Offers>().
@@ -111,19 +107,17 @@ public class SearchResultsFragment extends Fragment {
             public void onDataChanged() {
                 super.onDataChanged();
 
-                if(getItemCount() ==0){
-                                 Snackbar
-                    .make(mRecyclerView, "No items matched your search", Snackbar.LENGTH_INDEFINITE).
-                    show();
+                if (getItemCount() == 0) {
+                    Snackbar
+                            .make(mRecyclerView, "No items matched your search", Snackbar.LENGTH_INDEFINITE).
+                            show();
                     return;
 
-                }
-                else{
+                } else {
 
                     //show results
                 }
             }
-
 
 
             @Override
@@ -133,7 +127,7 @@ public class SearchResultsFragment extends Fragment {
                 final DatabaseReference offerRef = getRef(position);
 
                 final String offerKey = offerRef.getKey();
-                holder.bindToOffer(model, getContext(), mStorageRef);
+                holder.bindToOffer(model);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -158,8 +152,6 @@ public class SearchResultsFragment extends Fragment {
                 });
 
 
-
-
             }
 
 
@@ -170,16 +162,13 @@ public class SearchResultsFragment extends Fragment {
                 LayoutInflater inflater = LayoutInflater.from(context);
                 boolean shouldAttachtoParentImmediately = false;
                 View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachtoParentImmediately);
-                OfferViewHolder offerViewHolder = new OfferViewHolder(view);
+                OfferViewHolder offerViewHolder = new OfferViewHolder(view, getContext(), mStorageRef);
                 return offerViewHolder;
 
             }
 
 
         };
-
-
-
 
 
         mRecyclerView.setAdapter(mAdapter);

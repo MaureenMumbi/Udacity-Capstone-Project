@@ -62,14 +62,12 @@ import static com.easyoffer.android.easyofferapp.ui.CategoryDetailActivity.EXTRA
  */
 public class CategoriesFragment extends Fragment {
 
+    @BindView(R.id.categoryofferlistrv)
+    RecyclerView mRecyclerView;
     private DatabaseReference mdatabaseReference;
     private StorageReference mStorageRef;
     private ValueEventListener mOfferListener;
     private ArrayList<String> category_members;
-    @BindView(R.id.categoryofferlistrv)
-    RecyclerView mRecyclerView;
-
-
     private String category_key;
     private FirebaseRecyclerAdapter<Offers, OfferViewHolder> mAdapter;
 
@@ -126,7 +124,7 @@ public class CategoriesFragment extends Fragment {
             protected void onBindViewHolder(@NonNull OfferViewHolder holder, int position, @NonNull final Offers model) {
                 DatabaseReference offerRef = getRef(position);
                 final String offerKey = offerRef.getKey();
-                holder.bindToOffer(model, getContext(), mStorageRef);
+                holder.bindToOffer(model);
 
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +162,7 @@ public class CategoriesFragment extends Fragment {
                 LayoutInflater inflater = LayoutInflater.from(context);
                 boolean shouldAttachtoParentImmediately = false;
                 View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachtoParentImmediately);
-                OfferViewHolder offerViewHolder = new OfferViewHolder(view);
+                OfferViewHolder offerViewHolder = new OfferViewHolder(view, getContext(), mStorageRef);
                 return offerViewHolder;
 
             }

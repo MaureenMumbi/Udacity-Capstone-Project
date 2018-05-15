@@ -16,13 +16,11 @@ import butterknife.ButterKnife;
  * Created by Mauryn on 4/16/2018.
  */
 
-public class CategoryDetailActivity extends AppCompatActivity{
-    public static String EXTRA_CATEGORY_KEY ="EXTRA_CATEGORY_KEY";
-    private String getExtraCategoryKey;
+public class CategoryDetailActivity extends AppCompatActivity {
+    public static String EXTRA_CATEGORY_KEY = "EXTRA_CATEGORY_KEY";
     @BindView(R.id.main_toolbar)
     Toolbar toolbar;
-
-
+    private String getExtraCategoryKey;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +32,6 @@ public class CategoryDetailActivity extends AppCompatActivity{
         if (savedInstanceState == null) {
 
             getExtraCategoryKey = getIntent().getStringExtra(EXTRA_CATEGORY_KEY);
-
 
 
             Bundle bundle = getIntent().getExtras();
@@ -49,11 +46,10 @@ public class CategoryDetailActivity extends AppCompatActivity{
         }
 
 
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getExtraCategoryKey);
-        Log.i("Category Title" , getExtraCategoryKey);
+        Log.i("Category Title", getExtraCategoryKey);
 
 
     }

@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.easyoffer.android.easyofferapp.R;
@@ -78,14 +77,6 @@ public class FavoriteOfferWidget extends AppWidgetProvider {
 
     }
 
-    @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        //Start the intent service update widget action, the service takes care of updating the widgets UI
-
-        OfferListService.startActionUpdateFavoritesWidgets(context);
-    }
-
-
     public static void updateOfferWidgets(Context context, AppWidgetManager appWidgetManager,
                                           ArrayList<Offer> offerList, int[] appWidgetIds) {
 
@@ -101,7 +92,7 @@ public class FavoriteOfferWidget extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list_view);
         if (offerList == null || offerList.size() == 0) {
-           Intent configIntent = new Intent(context, FavoritesActivity.class);
+            Intent configIntent = new Intent(context, FavoritesActivity.class);
 
             PendingIntent configPendingIntent = PendingIntent.getActivity(context, 0, configIntent, 0);
 
@@ -120,15 +111,13 @@ public class FavoriteOfferWidget extends AppWidgetProvider {
             views.setEmptyView(R.id.favlist_view, R.id.empty_view);
 
 
-           // Intent appIntent = new Intent(context, FavoritesActivity.class);
-          //  appIntent.putExtra(FAVOURITE_OFFER_LIST, offerList);
+            // Intent appIntent = new Intent(context, FavoritesActivity.class);
+            //  appIntent.putExtra(FAVOURITE_OFFER_LIST, offerList);
             //PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, 0);
-         //   views.setOnClickPendingIntent(R.id.favlist_view, appPendingIntent);
+            //   views.setOnClickPendingIntent(R.id.favlist_view, appPendingIntent);
             Intent titleIntent = new Intent(context, FavoritesActivity.class);
             PendingIntent titlePendingIntent = PendingIntent.getActivity(context, 0, titleIntent, 0);
             views.setOnClickPendingIntent(R.id.widgetTitleLabel, titlePendingIntent);
-
-
 
 
             Intent clickIntentTemplate = new Intent(context, OfferDetailActivity.class);
@@ -144,6 +133,12 @@ public class FavoriteOfferWidget extends AppWidgetProvider {
 
     }
 
+    @Override
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        //Start the intent service update widget action, the service takes care of updating the widgets UI
+
+        OfferListService.startActionUpdateFavoritesWidgets(context);
+    }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
